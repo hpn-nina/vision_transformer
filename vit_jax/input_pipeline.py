@@ -47,6 +47,7 @@ def get_tfds_info(dataset, split):
 def get_directory_info(directory):
   """Returns information about directory dataset -- see `get_dataset_info()`."""
   examples_glob = f'{directory}/*/*.jpg'
+
   paths = glob.glob(examples_glob)
   get_classname = lambda path: path.split('/')[-2]
   class_names = sorted(set(map(get_classname, paths)))
@@ -74,6 +75,8 @@ def get_dataset_info(dataset, split):
     - examples_glob: Glob to select all files, or None (for tfds dataset).
   """
   directory = os.path.join(dataset, split)
+  if dataset == 'intel':
+      directory = os.path.join('/content', directory)
   if os.path.isdir(directory):
     return get_directory_info(directory)
   return get_tfds_info(dataset, split)
@@ -107,6 +110,8 @@ def get_datasets(config):
 def get_data_from_directory(*, config, directory, mode):
   """Returns dataset as read from specified `directory`."""
 
+  if directory == '/content/intel':
+      directory = os.path.join(directory, mode)
   dataset_info = get_directory_info(directory)
   data = tf.data.Dataset.list_files(dataset_info['examples_glob'])
   class_names = [
