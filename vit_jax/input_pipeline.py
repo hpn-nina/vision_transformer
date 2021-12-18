@@ -75,7 +75,7 @@ def get_dataset_info(dataset, split):
     - examples_glob: Glob to select all files, or None (for tfds dataset).
   """
   directory = os.path.join(dataset, split)
-  if dataset == 'intel':
+  if dataset == 'intel' or dataset=='emotion':
       directory = os.path.join('/content', directory)
   if os.path.isdir(directory):
     return get_directory_info(directory)
@@ -110,7 +110,7 @@ def get_datasets(config):
 def get_data_from_directory(*, config, directory, mode):
   """Returns dataset as read from specified `directory`."""
 
-  if directory == '/content/intel':
+  if directory == '/content/intel' or directory == '/content/emotion':
       directory = os.path.join(directory, mode)
   dataset_info = get_directory_info(directory)
   data = tf.data.Dataset.list_files(dataset_info['examples_glob'])
