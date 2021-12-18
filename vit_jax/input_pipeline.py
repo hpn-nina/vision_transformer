@@ -47,6 +47,8 @@ def get_tfds_info(dataset, split):
 def get_directory_info(directory):
   """Returns information about directory dataset -- see `get_dataset_info()`."""
   examples_glob = f'{directory}/*/*.jpg'
+  if directory == '/content/emotion':
+      examples_glob = f'{directory}/*/*.png'
 
   paths = glob.glob(examples_glob)
   get_classname = lambda path: path.split('/')[-2]
