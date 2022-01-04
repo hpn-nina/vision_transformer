@@ -1,3 +1,8 @@
+# Introduction 
+
+Hi, this is Lialic. This is a repo where I store a small modification on Google repo which can be found @google_research.\
+In this repo, I had some change in the configurations on how the dataset took the information from
+
 # Vision Transformer and MLP-Mixer Architectures
 
 **Update (2.7.2021)**: Added the "When Vision Transformers Outperform 
